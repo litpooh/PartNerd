@@ -71,8 +71,10 @@ public class MailboxAccept extends AppCompatActivity {
 
             Button accept_btn = (Button) findViewById(R.id.btn_accept);
             Button decline_btn = (Button) findViewById(R.id.btn_decline);
+            TextView query = (TextView) findViewById(R.id.query);
             accept_btn.setVisibility(View.GONE);
             decline_btn.setVisibility(View.GONE);
+            query.setText("Request Accepted!");
 
             TextView reminder = (TextView) findViewById(R.id.reminder);
             reminder.setText("Contact Your groupmate as soon as possible! :) You can also screenshot this page.");
@@ -148,6 +150,7 @@ public class MailboxAccept extends AppCompatActivity {
             language = rootJSONObj.getString("language");
             phone = rootJSONObj.getString("phone");
             email = rootJSONObj.getString("email");
+            showInfo();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -179,7 +182,6 @@ public class MailboxAccept extends AppCompatActivity {
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
-                        showInfo();
                         pdialog.hide();
                     }
                 });

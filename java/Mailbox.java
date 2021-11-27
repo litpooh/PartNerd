@@ -141,7 +141,6 @@ public class Mailbox extends ListActivity {
             e.printStackTrace();
         }
 
-        showRequest(name, requestid);
     }
     public void connect(final String id) {
         final ProgressDialog pdialog = new ProgressDialog(this);
@@ -170,6 +169,7 @@ public class Mailbox extends ListActivity {
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
+                        showRequest(name, requestid);
                         pdialog.hide();
                     }
                 });
