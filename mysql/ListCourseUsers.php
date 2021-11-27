@@ -17,18 +17,29 @@ $course_id = (isset($_GET['course_id']) ? $_GET['course_id'] : "");
 
 
 if ($action == "select" && $course_id) {
-    $sql = "SELECT user.name FROM enroll, user, course WHERE enroll.course_id='$course_id' AND enroll.course_id = course.id AND enroll.user_id = user.id";
+    $sql = "SELECT user.name, user.id FROM enroll, user, course WHERE enroll.course_id='$course_id' AND enroll.course_id = course.id AND enroll.user_id = user.id";
 
     // $sql = "SELECT name FROM user WHERE email='u3557110@connect.hku.hk' AND password='123456'";
     $res = mysqli_query($link, $sql) or die(mysqli_error());
+    $res2 = mysqli_query($link, $sql) or die(mysqli_error());
 
     mysqli_close($link);
 
     echo '{"course_id":"' . $course_id . '"';
-    echo ', "name":[';
-    $add_delimiter = false;
 
+    echo ', "user_id":[';
+    $add_delimiter = false;
     while($row = mysqli_fetch_assoc($res)) {
+        if ($row['id']){
+            echo ($add_delimiter ? ', ' : '') . '"' . $row['id'] . '"';
+            $add_delimiter = true;
+        }
+    }
+    echo ']';
+
+    echo ', "user_name":[';
+    $add_delimiter = false;
+    while($row = mysqli_fetch_assoc($res2)) {
         if ($row['name']){
             echo ($add_delimiter ? ', ' : '') . '"' . $row['name'] . '"';
             $add_delimiter = true;
