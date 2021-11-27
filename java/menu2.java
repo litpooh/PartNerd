@@ -51,8 +51,9 @@ public class menu2 extends AppCompatActivity implements View.OnClickListener{
                 intent.putExtra("user_id",user_id);
                 startActivity(intent);
             case R.id.mailBox:
-                Toast.makeText(this, "open mailbox", Toast.LENGTH_SHORT).show();
-                return;
+                Intent intent2 = new Intent(getBaseContext(), Mailbox.class);
+                intent2.putExtra("user_id", user_id);
+                startActivity(intent2);
 
         }
 
