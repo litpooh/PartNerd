@@ -24,10 +24,14 @@
                 android:textColor="#1E90FF"
                 android:textSize="30sp" />
             <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="280dp"
+                android:layout_height="70dp"
                 android:text = "More Info..."
-                android:id="@+id/btn_accept"/>
+                android:id="@+id/btn_accept"
+                android:textColor="#ffffff"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:backgroundTint="#0ED689"/>
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
