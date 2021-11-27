@@ -50,7 +50,7 @@ public class MailboxAccept extends AppCompatActivity {
         Intent intent = this.getIntent();
         request_id = intent.getStringExtra("request_id");
         user_id = intent.getStringExtra("user_id");
-        connect(request_id.toString());
+        connect(request_id);
     }
 
     public void showInfo() {
@@ -63,25 +63,29 @@ public class MailboxAccept extends AppCompatActivity {
     }
 
     public void btn_accept(View v) {
-        TextView phoneField = (TextView) findViewById(R.id.phone);
-        TextView emailField = (TextView) findViewById(R.id.email);
-        phoneField.setText("Phone Number: " + phone);
-        emailField.setText("Email Address: " + email);
+        if (v.getId() == R.id.btn_accept) {
+            TextView phoneField = (TextView) findViewById(R.id.phone);
+            TextView emailField = (TextView) findViewById(R.id.email);
+            phoneField.setText("Phone Number: " + phone);
+            emailField.setText("Email Address: " + email);
 
-        Button accept_btn = (Button) findViewById(R.id.btn_accept);
-        Button decline_btn = (Button) findViewById(R.id.btn_decline);
-        accept_btn.setVisibility(View.GONE);
-        decline_btn.setVisibility(View.GONE);
+            Button accept_btn = (Button) findViewById(R.id.btn_accept);
+            Button decline_btn = (Button) findViewById(R.id.btn_decline);
+            accept_btn.setVisibility(View.GONE);
+            decline_btn.setVisibility(View.GONE);
 
-        TextView reminder = (TextView) findViewById(R.id.reminder);
-        reminder.setText("Contact Your groupmate as soon as possible! :) You can also screenshot this page.");
+            TextView reminder = (TextView) findViewById(R.id.reminder);
+            reminder.setText("Contact Your groupmate as soon as possible! :) You can also screenshot this page.");
+        }
     }
 
     public void btn_decline(View v) {
-        decline(request_id);
-        finish();
-        Intent i = new Intent(getBaseContext(), Mailbox.class);
-        startActivity(i);
+        if (v.getId() == R.id.btn_decline) {
+            decline(request_id);
+            finish();
+            Intent i = new Intent(getBaseContext(), Mailbox.class);
+            startActivity(i);
+        }
     }
 
     public String ReadBufferedHTML(BufferedReader reader, char [] htmlBuffer, int bufSz) throws java.io.IOException {
@@ -144,7 +148,6 @@ public class MailboxAccept extends AppCompatActivity {
             language = rootJSONObj.getString("language");
             phone = rootJSONObj.getString("phone");
             email = rootJSONObj.getString("email");
-            showInfo();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -176,6 +179,7 @@ public class MailboxAccept extends AppCompatActivity {
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
+                        showInfo();
                         pdialog.hide();
                     }
                 });
