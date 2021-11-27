@@ -60,24 +60,16 @@ public class Mailbox extends ListActivity {
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 View acceptView = view.findViewById(R.id.btn_accept);
-               // View declineView = view.findViewById(R.id.btn_decline);
-               // acceptView.setOnClickListener(Mailbox.this);
                 acceptView.setTag("accept" + position);
                 acceptView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(getBaseContext(), MailboxAccept.class);
                         intent.putExtra("request_id", requestid.get(position));
+                        intent.putExtra("user_id", user_id);
                         startActivity(intent);
                     }
                 });
-                //declineView.setTag("decline" + position);
-               // declineView.setOnClickListener(new View.OnClickListener() {
-                  //  @Override
-                  //  public void onClick(View v) {
-                  //      Toast.makeText(v.getContext(), "Button 1  clicked for row position=" + position, Toast.LENGTH_SHORT).show();
-                  //  }
-               // });
                 return view;
             }
         };

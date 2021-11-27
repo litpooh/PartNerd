@@ -36,6 +36,7 @@ import java.util.concurrent.Executors;
 
 public class MailboxAccept extends AppCompatActivity {
     String request_id;
+    String user_id;
     String name;
     String nationality;
     String language;
@@ -48,6 +49,7 @@ public class MailboxAccept extends AppCompatActivity {
         setContentView(R.layout.activity_mailbox_accept);
         Intent intent = this.getIntent();
         request_id = intent.getStringExtra("request_id");
+        user_id = intent.getStringExtra("user_id");
         connect(request_id.toString());
     }
 
@@ -78,7 +80,8 @@ public class MailboxAccept extends AppCompatActivity {
     public void btn_decline(View v) {
         decline(request_id);
         finish();
-        startActivity(getIntent());
+        Intent i = new Intent(getBaseContext(), Mailbox.class);
+        startActivity(i);
     }
 
     public String ReadBufferedHTML(BufferedReader reader, char [] htmlBuffer, int bufSz) throws java.io.IOException {
@@ -141,11 +144,10 @@ public class MailboxAccept extends AppCompatActivity {
             language = rootJSONObj.getString("language");
             phone = rootJSONObj.getString("phone");
             email = rootJSONObj.getString("email");
+            showInfo();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        showInfo();
     }
     public void connect(final String id) {
         final ProgressDialog pdialog = new ProgressDialog(this);
