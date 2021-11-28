@@ -17,6 +17,7 @@ $nationality = array();
 $language = array();
 $phone = array();
 $email = array();
+$gpa = array();
 
 $sql = "SELECT requester_user_id FROM request WHERE id = " . $request_id;
 $res = mysqli_query($link, $sql) or die(mysqli_error());
@@ -26,7 +27,7 @@ while ($row = mysqli_fetch_array($res)) {
 }
 
 for ($i = 0; $i < count($requester); $i++) {
-  $sql_name = "SELECT name, nationality, language, phone_number, email FROM user WHERE id = " . $requester[$i];
+  $sql_name = "SELECT name, nationality, language, phone_number, email, gpa FROM user WHERE id = " . $requester[$i];
   $res2 = mysqli_query($link, $sql_name) or die(mysqli_error());
 
   while ($row2 = mysqli_fetch_array($res2)) {
@@ -35,10 +36,11 @@ for ($i = 0; $i < count($requester); $i++) {
     array_push($language, $row2['language']);
     array_push($phone, $row2['phone_number']);
     array_push($email, $row2['email']);
+    array_push($gpa, $row2['gpa']);
   }
 }
 
 mysqli_close(link);
 
-echo '"name":' . $requestname[0] . ', "nationality":' . $nationality[0] . ', "language":' . $language[0] . ', "phone":' . $phone[0] . ', "email":'. $email[0] . '}';
+echo '"name":' . $requestname[0] . ', "nationality":' . $nationality[0] . ', "language":' . $language[0] . ', "phone":' . $phone[0] . ', "email":'. $email[0] . ', "gpa":' . $gpa[0] . '}';
 ?>
