@@ -12,5 +12,7 @@ Pages that can run without bugs:
 7. Browse other users in a course.   - ListOtherUsers.java, ListOtherUsers.php
 
 (Developed by Jason)
+1. See the requests of the user  -  Mailbox.java, mailbox.php
+2. See the information of the requester, and accept/decline the corresponding request  -  MailboxAccept.java, declineRequest.php, requesterInfo.php
 
 (Developed by Sam and Lucas)
