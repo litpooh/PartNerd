@@ -10,6 +10,8 @@ Pages that can run without bugs:
 5. Choose enrol or browse.  -  EnrollorBrowse.java
 6. Enrol/Insert success.    - InsertSuccess.java, InsertSuccess.php
 7. Browse other users in a course.   - ListOtherUsers.java, ListOtherUsers.php
+8. Showing one user's detailed informtaion.  - Request.java, sendRequest.php
+9. Request Success  - RequestSuccess.java
 
 (Developed by Jason)
 1. See the requests of the user  -  Mailbox.java, mailbox.php
