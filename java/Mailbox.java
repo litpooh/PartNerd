@@ -48,6 +48,11 @@ public class Mailbox extends ListActivity {
         connect(user_id.toString());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     public void showRequest(ArrayList<String> name, ArrayList<String> requestid) {
         for (int i = 0; i < name.size(); i++) {
             Map<String, Object> map = new HashMap<String, Object>();

@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -37,11 +39,13 @@ import java.util.concurrent.Executors;
 public class MailboxAccept extends AppCompatActivity {
     String request_id;
     String user_id;
-    String name;
-    String nationality;
-    String language;
-    String phone;
-    String email;
+    static String name;
+    static String nationality;
+    static String language;
+    static String gpa;
+    static String phone;
+    static String email;
+    static Boolean decline_done = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,23 +55,30 @@ public class MailboxAccept extends AppCompatActivity {
         request_id = intent.getStringExtra("request_id");
         user_id = intent.getStringExtra("user_id");
         connect(request_id);
+        CookieHandler.setDefault(new CookieManager());
     }
 
     public void showInfo() {
         TextView nameField = (TextView) findViewById(R.id.name);
         TextView NationField = (TextView) findViewById(R.id.nationality);
         TextView LangField = (TextView) findViewById(R.id.language);
+        TextView gpaField = (TextView) findViewById(R.id.gpa);
+        TextView phoneField = (TextView) findViewById(R.id.phone);
+        TextView emailField = (TextView) findViewById(R.id.email);
+        phoneField.setText("Phone Number: " + phone);
+        emailField.setText("Email Address: " + email);
         nameField.setText("Name: " + name);
         NationField.setText("Nationality: " + nationality);
         LangField.setText("Language: " + language);
+        gpaField.setText("GPA: " + gpa);
     }
 
     public void btn_accept(View v) {
         if (v.getId() == R.id.btn_accept) {
             TextView phoneField = (TextView) findViewById(R.id.phone);
             TextView emailField = (TextView) findViewById(R.id.email);
-            phoneField.setText("Phone Number: " + phone);
-            emailField.setText("Email Address: " + email);
+            phoneField.setVisibility(View.VISIBLE);
+            emailField.setVisibility(View.VISIBLE);
 
             Button accept_btn = (Button) findViewById(R.id.btn_accept);
             Button decline_btn = (Button) findViewById(R.id.btn_decline);
@@ -84,9 +95,9 @@ public class MailboxAccept extends AppCompatActivity {
     public void btn_decline(View v) {
         if (v.getId() == R.id.btn_decline) {
             decline(request_id);
-            finish();
-            Intent i = new Intent(getBaseContext(), Mailbox.class);
-            startActivity(i);
+            if (decline_done) {
+                finish();
+            }
         }
     }
 
@@ -148,6 +159,7 @@ public class MailboxAccept extends AppCompatActivity {
             name = rootJSONObj.getString("name");
             nationality = rootJSONObj.getString("nationality");
             language = rootJSONObj.getString("language");
+            gpa = rootJSONObj.getString("gpa");
             phone = rootJSONObj.getString("phone");
             email = rootJSONObj.getString("email");
             showInfo();
@@ -171,6 +183,13 @@ public class MailboxAccept extends AppCompatActivity {
                 pdialog.setMessage("Before ...");
                 pdialog.show();
                 final String jsonString = getJsonPage(url);
+                final String jsonString2 = getJsonPage(url);
+                try {
+                    Thread.sleep(500);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
                 if (jsonString.equals("Fail to login"))
                     success = false;
                 final boolean finalSuccess = success;
@@ -178,7 +197,12 @@ public class MailboxAccept extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (finalSuccess) {
-                            parse_JSON_String_and_Switch_Activity(jsonString);
+                            if (jsonString.isEmpty()) {
+                                parse_JSON_String_and_Switch_Activity(jsonString);
+                            }
+                            else {
+                                parse_JSON_String_and_Switch_Activity(jsonString2);
+                            }
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
@@ -211,13 +235,15 @@ public class MailboxAccept extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (finalSuccess) {
-                            parse_JSON_String_and_Switch_Activity(jsonString);
+                            decline_done = true;
                         } else {
                             alert( "Error", "Fail to connect" );
                         }
                         pdialog.hide();
                     }
                 });
+
+                finish();
             }
         });
     }
