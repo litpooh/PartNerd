@@ -1,5 +1,9 @@
 # PartNerd
 
+For the past two years, we were having online lessons and did not have chances to meet classmates in a face-to-face manner. As a result, we use the Moodle forum to find others to form groups. But there are some shortcuts, such as we have to click into many posts to find a suitable group. Also, it is trivial to access the Moodle forum via browser in phone and notifications for any updates are always delayed. Therefore, we decided to make a mobile application which provides improved experience and instant notification. Users can send requests to classmates that they are interested to work with and their contact information will be only viewed if the requests are accepted. Moreover, rating function is implemented so that users can comment on their groupmates and let others to view.
+
+Demo Video: https://drive.google.com/file/d/1qtKq2OUR1KpLLijTMpBOEs_Jm_IXAvzB/view?usp=share_link
+
 ## Contribution:
 
 Pages that can run without bugs:
