@@ -6,7 +6,7 @@ Demo Video: https://drive.google.com/file/d/1qtKq2OUR1KpLLijTMpBOEs_Jm_IXAvzB/vi
 
 ## Contribution:
 
-(Developed by Kin and Winki)
+Developed by Kin and Winki:
 1. Login  -  MainActivity.java, checkUser.php
 2. Menu   -  menu2.java
 3. Courses.  -  Courses.java
@@ -17,8 +17,8 @@ Demo Video: https://drive.google.com/file/d/1qtKq2OUR1KpLLijTMpBOEs_Jm_IXAvzB/vi
 8. Showing one user's detailed informtaion.  - Request.java, sendRequest.php
 9. Request Success  - RequestSuccess.java
 
-(Developed by Jason)
+Developed by Jason:
 1. See the requests of the user  -  Mailbox.java, mailbox.php
 2. See the information of the requester, and accept/decline the corresponding request  -  MailboxAccept.java, declineRequest.php, requesterInfo.php
 
-(Developed by Sam and Lucas)
+Developed by Sam and Lucas:
