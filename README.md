@@ -6,8 +6,6 @@ Demo Video: https://drive.google.com/file/d/1qtKq2OUR1KpLLijTMpBOEs_Jm_IXAvzB/vi
 
 ## Contribution:
 
-Pages that can run without bugs:
-
 (Developed by Kin and Winki)
 1. Login  -  MainActivity.java, checkUser.php
 2. Menu   -  menu2.java
